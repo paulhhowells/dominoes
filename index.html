@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Dominoes</title>
+
+		<style>
+			/**
+				Normalise:
+				thanks to: https://github.com/necolas/normalize.css/blob/master/normalize.css
+			*/
+			html,
+			body {
+				margin: 0;
+				padding: 0;
+			}
+			html {
+				-webkit-text-size-adjust: 100%; /* Prevent adjustments of font size after orientation changes in iOS. */
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+			}
+			main {
+				display: block; /* Render the `main` element consistently in IE. */
+			}
+			img {
+				border-style: none; /* Remove the border on images inside links in IE 10. */
+			}
+			a {
+				background-color: transparent; /* Remove the gray background on active links in IE 10. */
+			}
+			pre {
+				font-family: monospace, monospace; /* Correct the inheritance and scaling of font size in all browsers. */
+				font-size: 1em; /* Correct the odd `em` font sizing in all browsers. */
+			}
+			sup,
+			sub {
+				vertical-align: baseline;
+				position: relative;
+				font-size: 0.66em;
+			}
+			sup {
+				top: -0.4em;
+			}
+			sub {
+				top: 0.4em;
+			}
+
+			/* Defaults: */
+			body {
+				font-family: "Helvetica Neue", sans-serif;
+				font-size: 1rem;
+				line-height: 1.375;
+				color: #fff;
+				background: #333;
+			}
+			p {
+				margin: 1em 0;
+				font-weight: 300;
+			}
+			h1 {
+				margin: 0.25em 0;
+				font-weight: 600;
+				font-size: 3.75rem;
+				line-height: 1.2;
+				letter-spacing: -0.05em;
+			}
+
+			/* Components: */
+			.page {
+				display: flex;
+				flex-direction: column;
+				min-height: 100vh;
+
+				/* Below 20rem this will cause the viewport will scale. */
+				min-width: 20rem;
+			}
+
+			.slice-a {
+				color: #0c2c3a;
+				background-color: #e7e9ec;
+			}
+			.slice-b {
+				background-color: #4d7392;
+			}
+			.slice-c {
+				background-color: #0c2c3a;
+			}
+			.domino-inner {
+				display: flow-root;
+				box-sizing: border-box;
+				max-width: 50rem;
+				margin: 0 auto;
+				padding: 1rem;
+				border-left: 1px solid white;
+				border-right: 1px solid white;
+			}
+
+			.domino-flex,
+			.domino-grid {
+				font-weight: 500;
+				font-size: 1.125rem;
+				line-height: 1.5;
+			}
+
+			/* Flexbox */
+			.domino-flex {
+				display: flex;
+				flex-wrap: wrap;
+			}
+			.domino-flex__first,
+			.domino-flex__second {
+				flex-grow: 1;
+				flex-shrink: 1;
+				flex-basis: 20rem;
+				box-sizing: border-box;
+				padding: 1rem;
+			}
+			.domino-flex__first {
+				background-color: #fff7;
+			}
+			.domino-flex__second {
+				background-color: #0007;
+			}
+
+			/* CSS Grid */
+			.domino-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+				grid-gap: 1rem;
+				/* width: 100%; */
+			}
+			.domino-grid__first,
+			.domino-grid__second {
+				box-sizing: border-box;
+				padding: 1rem;
+			}
+			.domino-grid__first {
+				background-color: #fff7;
+			}
+			.domino-grid__second {
+				background-color: #0007;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="page">
+			<div class="slice-a">
+				<div class="domino-inner">
+					<h1>Dominoes</h1>
+					<p>
+						Domino layout comparing Flexbox and CSS Grid techniques.
+					</p>
+					<p>
+						Rotating at 20 rem without media queries.
+					</p>
+				</div>
+			</div>
+
+			<section class="slice-b">
+				<div class="domino-inner domino-flex">
+					<div class="domino-flex__first">
+						<svg
+							version="1.1"
+							xmlns="http://www.w3.org/2000/svg"
+							xmlnsXlink="http://www.w3.org/1999/xlink"
+							viewbox="0 0 64 64"
+							width="64px"
+							height="64px"
+						>
+							<rect width="64" height="64" fill="#0005" rx="4" />
+							<circle cx="16" cy="48" r="8" fill="#FFF" />
+							<circle cx="32" cy="32" r="8" fill="#FFF" />
+							<circle cx="48" cy="16" r="8" fill="#FFF" />
+						</svg>
+						Flex 1<sup>st</sup>
+					</div>
+					<div class="domino-flex__second">
+						<svg
+							version="1.1"
+							xmlns="http://www.w3.org/2000/svg"
+							xmlnsXlink="http://www.w3.org/1999/xlink"
+							viewbox="0 0 64 64"
+							width="64px"
+							height="64px"
+						>
+							<rect width="64" height="64" fill="#0005" rx="4" />
+							<circle cx="16" cy="16" r="8" fill="#FFF" />
+							<circle cx="48" cy="16" r="8" fill="#FFF" />
+							<circle cx="16" cy="48" r="8" fill="#FFF" />
+							<circle cx="48" cy="48" r="8" fill="#FFF" />
+						</svg>
+						Flex 2<sup>nd</sup>
+					</div>
+				</div>
+			</section>
+
+			<section class="slice-c">
+				<div class="domino-inner domino-grid">
+					<div class="domino-grid__first">
+						<svg
+							version="1.1"
+							xmlns="http://www.w3.org/2000/svg"
+							xmlnsXlink="http://www.w3.org/1999/xlink"
+							viewbox="0 0 64 64"
+							width="64px"
+							height="64px"
+						>
+							<rect width="64" height="64" fill="#0005" rx="4" />
+							<circle cx="32" cy="32" r="8" fill="#FFF" />
+						</svg>
+						Grid 1<sup>st</sup>
+					</div>
+					<div class="domino-grid__second">
+						<svg
+							version="1.1"
+							xmlns="http://www.w3.org/2000/svg"
+							xmlnsXlink="http://www.w3.org/1999/xlink"
+							viewbox="0 0 64 64"
+							width="64px"
+							height="64px"
+						>
+							<rect width="64" height="64" fill="#0005" rx="4" />
+							<circle cx="16" cy="16" r="8" fill="#FFF" />
+							<circle cx="48" cy="16" r="8" fill="#FFF" />
+							<circle cx="16" cy="48" r="8" fill="#FFF" />
+							<circle cx="48" cy="48" r="8" fill="#FFF" />
+							<circle cx="32" cy="32" r="8" fill="#FFF" />
+						</svg>
+						Grid 2<sup>nd</sup>
+					</div>
+				</div>
+			</section>
+		</div>
+	</body>
+</html>
